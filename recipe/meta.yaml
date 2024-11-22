@@ -1,5 +1,6 @@
 {% set name = "pytorch_warmup" %}
 {% set version = "0.2.0" %}
+{% set python_min = "3.7" %}
 
 package:
   name: {{ name }}-pkg
@@ -21,10 +22,11 @@ outputs:
 
     requirements:
       host:
-        - python >=3.7
         - pip
+        - python {{ python_min }}
+        - setuptools
       run:
-        - python >=3.7
+        - python >={{ python_min }}
         - pytorch >=1.1
 
     test:
@@ -34,6 +36,7 @@ outputs:
         - pip check
       requires:
         - pip
+        - python {{ python_min }}
 
   - name: pytorch-warmup
     build:
@@ -50,6 +53,7 @@ outputs:
         - pip check
       requires:
         - pip
+        - python >={{ python_min }}
 
 about:
   home: https://pypi.org/project/pytorch_warmup
