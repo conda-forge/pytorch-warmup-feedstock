@@ -1,5 +1,6 @@
 {% set name = "pytorch_warmup" %}
-{% set version = "0.1.0" %}
+{% set version = "0.2.0" %}
+{% set python_min = "3.7" %}
 
 package:
   name: {{ name }}-pkg
@@ -7,7 +8,7 @@ package:
 
 source:
   url: https://github.com/Tony-Y/pytorch_warmup/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: d16fb8881cdaa0ca5ba0d932e38a465bc6f2bb38cb93a01d70073419be512c59
+  sha256: 5599614d25eb276e8e84d0d21c4c62641751044eb3a7f9ac21165100be2239df
 
 build:
   number: 0
@@ -21,10 +22,11 @@ outputs:
 
     requirements:
       host:
-        - python >=3.7
         - pip
+        - python {{ python_min }}
+        - setuptools
       run:
-        - python >=3.7
+        - python >={{ python_min }}
         - pytorch >=1.1
 
     test:
@@ -34,6 +36,7 @@ outputs:
         - pip check
       requires:
         - pip
+        - python {{ python_min }}
 
   - name: pytorch-warmup
     build:
@@ -50,6 +53,7 @@ outputs:
         - pip check
       requires:
         - pip
+        - python >={{ python_min }}
 
 about:
   home: https://pypi.org/project/pytorch_warmup
